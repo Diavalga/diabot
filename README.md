@@ -1,4 +1,4 @@
-# 🤖 Wabot
+# 🤖 Diabot
 
 Bot WhatsApp serbaguna berbasis [Baileys](https://github.com/WhiskeySockets/Baileys). Bisa membuat stiker, mengubah format file, mengunduh video YouTube/TikTok, bermain game dengan sistem poin, dan membantu produktivitas (pengingat dan daftar tugas).
 
@@ -138,7 +138,7 @@ Restart komputer kalau diminta.
 **3. Ikuti langkah [Linux: Debian / Ubuntu](#linux-debian--ubuntu--linux-mint)** di atas, semuanya diketik di jendela Ubuntu tadi.
 
 **Tips WSL:**
-- Simpan proyek di dalam folder Linux (misalnya `~/wabot`), **jangan** di `/mnt/c/...`. Kalau di `/mnt/c`, bot jauh lebih lambat.
+- Simpan proyek di dalam folder Linux (misalnya `~/diabot`), **jangan** di `/mnt/c/...`. Kalau di `/mnt/c`, bot jauh lebih lambat.
 - Panel setup nanti bisa dibuka dari browser Windows biasa lewat alamat `http://127.0.0.1:3000/...`.
 - Ubuntu di WSL mati kalau jendela terminalnya ditutup. Untuk 24 jam, lihat bagian [Menjalankan 24 jam](#-menjalankan-24-jam).
 
@@ -177,6 +177,8 @@ Salin **seluruh alamat** (termasuk `?key=...`) ke browser. Alamat ini berubah se
 
 **4. Isi panel, ada 4 langkah di menu kiri:**
 
+![Panel setup Diabot](screenshots/panel-setup.jpeg)
+
 | Langkah | Yang dilakukan |
 |---|---|
 | **1. Pengaturan** | Isi nomor bot (format `62812xxxxxxx`, tanpa `+` dan tanpa `0` di depan), nama bot, nama pemilik, dan nomor owner. Email dan password `.sysadmin` boleh dikosongkan. Klik **Simpan & tautkan WhatsApp**. |
@@ -214,6 +216,24 @@ Jalankan dari **folder utama proyek**, karena beberapa jalur file bersifat relat
 Semua perintah diawali titik (`.`) dan jalan di chat pribadi maupun grup. Kirim `.menu` untuk melihat daftar terbaru.
 
 Untuk perintah yang butuh file: **kirim file dengan perintah sebagai caption**, atau **reply file itu dengan perintahnya**.
+
+### Tampilan menu
+
+Kirim `.menu` ke bot untuk melihat daftar perintah, dikelompokkan per kategori:
+
+![Tampilan menu Diabot](screenshots/menu.jpeg)
+
+| Kategori | Perintah |
+|---|---|
+| Converting File | `.topdf`, `.todocx`, `.topng`, `.totxt`, `.ytmp4`, `.ytmp3`, `.tiktok` |
+| Umum | `.ping`, `.menu`, `.status` |
+| Games | `.game`, `.dadu` |
+| Fitur Poin | `.poin`, `.daily`, `.top`, `.tf`, `.shop`, `.setstiker` |
+| Produktivitas | `.remind`, `.todo` |
+| Stiker | `.stiker`, `.toimg` |
+| Secret | `.sysadmin` (khusus admin) |
+
+Menu juga menampilkan sapaan, tanggal dan jam, serta uptime bot. Di bagian bawah ada pengingat: kirim file dengan perintah sebagai caption, atau reply file dengan perintahnya.
 
 ### Stiker
 
@@ -346,11 +366,11 @@ Kalau panel `setup.js` ditutup (`Ctrl+C`), bot yang dijalankan lewat panel ikut 
 
 ```bash
 npm install -g pm2
-pm2 start index.js --name wabot
+pm2 start index.js --name diabot
 pm2 save
 ```
 
-Perintah berguna: `pm2 logs wabot` (lihat log), `pm2 restart wabot`, `pm2 stop wabot`.
+Perintah berguna: `pm2 logs diabot` (lihat log), `pm2 restart diabot`, `pm2 stop diabot`.
 
 > Satu sesi WhatsApp hanya boleh dipakai **satu** proses. Jangan jalankan bot dari panel dan dari `pm2` bersamaan.
 
@@ -366,6 +386,7 @@ diabot/
 ├── commands/         # satu file per kategori perintah
 ├── lib/              # fungsi bantu: penyimpanan, poin, admin, unduhan, tampilan
 ├── assets/           # opsional: banner.jpg untuk gambar di atas menu
+├── screenshots/      # gambar untuk README (panel setup dan tampilan menu)
 ├── data/             # data pengguna (dibuat otomatis, tidak ikut ke GitHub)
 ├── auth_bot1/        # sesi WhatsApp (dibuat otomatis, tidak ikut ke GitHub)
 └── venv/             # alat Python (yt-dlp, pdf2docx)
